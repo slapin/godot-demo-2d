@@ -1,0 +1,198 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/player.gd" type="Script" id=1]
+[ext_resource path="res://main.gd" type="Script" id=2]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+
+[sub_resource type="NoiseTexture" id=2]
+width = 256
+height = 256
+seamless = true
+noise = SubResource( 1 )
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 16.0
+
+[node name="main" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 602.397, 335.693 )
+scale = Vector2( 5.70623, 3.6226 )
+texture = SubResource( 2 )
+
+[node name="player" type="KinematicBody2D" parent="."]
+position = Vector2( 300, 150 )
+script = ExtResource( 1 )
+is_player = true
+
+[node name="shape" type="CollisionShape2D" parent="player"]
+shape = SubResource( 3 )
+
+[node name="body" type="Polygon2D" parent="player"]
+color = Color( 0.705882, 0.678431, 0.678431, 1 )
+polygon = PoolVector2Array( -6.4624, -14.1747, -2.90251, -15.5986, 5.35645, -15.4563, 8.20436, -14.0323, 8.06197, 13.7349, 4.92926, 15.3012, -3.3297, 15.586, -6.88959, 13.4501 )
+
+[node name="head" type="Polygon2D" parent="player/body"]
+color = Color( 0.101961, 0.0862745, 0.0862745, 1 )
+polygon = PoolVector2Array( -6.14563, -5.92804, -1.19376, -8.33646, 4.64447, -8.19407, 8.06197, -5.91573, 9.48592, -0.362305, 8.34676, 4.76395, 4.07488, 7.32707, -1.47855, 7.18468, -5.94171, 3.45168, -7.16516, -2.0538 )
+
+[node name="sword" type="Polygon2D" parent="player/body"]
+
+[node name="attacked" type="Polygon2D" parent="player/body"]
+visible = false
+color = Color( 0.686275, 0.207843, 0.207843, 0.74902 )
+polygon = PoolVector2Array( -5.56226, -10.155, -8.69495, -44.33, 0.418365, -11.579, 15.9395, -43.3332, 6.82617, -10.4398, 41.2859, -31.372, 9.8165, -5.59836, 52.3928, 0.0974731, 12.522, -0.472107, 48.6906, 19.1785, 16.9363, 11.7739, 33.1694, 34.9844, 8.39252, 7.21725, 26.4768, 35.8388, 7.39575, 14.4794, 11.3828, 29.0038, 3.97827, 14.3371, 1.27277, 44.5249, 0.133575, 13.9099, -15.8148, 40.3955, -5.13507, 12.0587, -31.4783, 26.5831, -11.8277, 7.21725, -41.0188, 3.37257, -9.54932, 1.52142, -33.0446, -19.5531, -11.9701, -4.88638, -28.0608, -31.0872, -16.9539, -20.2651, -21.653, -36.783 )
+
+[node name="attack_ray" type="RayCast2D" parent="player"]
+enabled = true
+cast_to = Vector2( 40, 0 )
+
+[node name="cam" type="Camera2D" parent="player"]
+current = true
+zoom = Vector2( 0.7, 0.7 )
+
+[node name="enemy" type="KinematicBody2D" parent="."]
+position = Vector2( 400, 300 )
+rotation = 3.14159
+script = ExtResource( 1 )
+speed = 250.0
+
+[node name="shape" type="CollisionShape2D" parent="enemy"]
+shape = SubResource( 3 )
+
+[node name="body" type="Polygon2D" parent="enemy"]
+color = Color( 0.705882, 0.678431, 0.678431, 1 )
+polygon = PoolVector2Array( -6.4624, -14.1747, -2.90251, -15.5986, 5.35645, -15.4563, 8.20436, -14.0323, 8.06197, 13.7349, 4.92926, 15.3012, -3.3297, 15.586, -6.88959, 13.4501 )
+
+[node name="head" type="Polygon2D" parent="enemy/body"]
+color = Color( 0.101961, 0.0862745, 0.0862745, 1 )
+polygon = PoolVector2Array( -6.14563, -5.92804, -1.19376, -8.33646, 4.64447, -8.19407, 8.06197, -5.91573, 9.48592, -0.362305, 8.34676, 4.76395, 4.07488, 7.32707, -1.47855, 7.18468, -5.94171, 3.45168, -7.16516, -2.0538 )
+
+[node name="sword" type="Polygon2D" parent="enemy/body"]
+
+[node name="attacked" type="Polygon2D" parent="enemy/body"]
+visible = false
+rotation = 3.14159
+color = Color( 0.686275, 0.207843, 0.207843, 0.74902 )
+polygon = PoolVector2Array( -5.56226, -10.155, -8.69495, -44.33, 0.418365, -11.579, 15.9395, -43.3332, 6.82617, -10.4398, 41.2859, -31.372, 9.8165, -5.59836, 52.3928, 0.0974731, 12.522, -0.472107, 48.6906, 19.1785, 16.9363, 11.7739, 33.1694, 34.9844, 8.39252, 7.21725, 26.4768, 35.8388, 7.39575, 14.4794, 11.3828, 29.0038, 3.97827, 14.3371, 1.27277, 44.5249, 0.133575, 13.9099, -15.8148, 40.3955, -5.13507, 12.0587, -31.4783, 26.5831, -11.8277, 7.21725, -41.0188, 3.37257, -9.54932, 1.52142, -33.0446, -19.5531, -11.9701, -4.88638, -28.0608, -31.0872, -16.9539, -20.2651, -21.653, -36.783 )
+
+[node name="attack_ray" type="RayCast2D" parent="enemy/body"]
+enabled = true
+cast_to = Vector2( 40, 0 )
+
+[node name="enemy2" type="KinematicBody2D" parent="."]
+position = Vector2( 380, 400 )
+rotation = 0.820305
+script = ExtResource( 1 )
+speed = 250.0
+
+[node name="shape" type="CollisionShape2D" parent="enemy2"]
+shape = SubResource( 3 )
+
+[node name="body" type="Polygon2D" parent="enemy2"]
+color = Color( 0.705882, 0.678431, 0.678431, 1 )
+polygon = PoolVector2Array( -6.4624, -14.1747, -2.90251, -15.5986, 5.35645, -15.4563, 8.20436, -14.0323, 8.06197, 13.7349, 4.92926, 15.3012, -3.3297, 15.586, -6.88959, 13.4501 )
+
+[node name="head" type="Polygon2D" parent="enemy2/body"]
+color = Color( 0.101961, 0.0862745, 0.0862745, 1 )
+polygon = PoolVector2Array( -6.14563, -5.92804, -1.19376, -8.33646, 4.64447, -8.19407, 8.06197, -5.91573, 9.48592, -0.362305, 8.34676, 4.76395, 4.07488, 7.32707, -1.47855, 7.18468, -5.94171, 3.45168, -7.16516, -2.0538 )
+
+[node name="sword" type="Polygon2D" parent="enemy2/body"]
+
+[node name="attacked" type="Polygon2D" parent="enemy2/body"]
+visible = false
+rotation = 3.14159
+color = Color( 0.686275, 0.207843, 0.207843, 0.74902 )
+polygon = PoolVector2Array( -5.56226, -10.155, -8.69495, -44.33, 0.418365, -11.579, 15.9395, -43.3332, 6.82617, -10.4398, 41.2859, -31.372, 9.8165, -5.59836, 52.3928, 0.0974731, 12.522, -0.472107, 48.6906, 19.1785, 16.9363, 11.7739, 33.1694, 34.9844, 8.39252, 7.21725, 26.4768, 35.8388, 7.39575, 14.4794, 11.3828, 29.0038, 3.97827, 14.3371, 1.27277, 44.5249, 0.133575, 13.9099, -15.8148, 40.3955, -5.13507, 12.0587, -31.4783, 26.5831, -11.8277, 7.21725, -41.0188, 3.37257, -9.54932, 1.52142, -33.0446, -19.5531, -11.9701, -4.88638, -28.0608, -31.0872, -16.9539, -20.2651, -21.653, -36.783 )
+
+[node name="attack_ray" type="RayCast2D" parent="enemy2/body"]
+enabled = true
+cast_to = Vector2( 40, 0 )
+
+[node name="enemy3" type="KinematicBody2D" parent="."]
+position = Vector2( 500, 450 )
+rotation = -0.279253
+script = ExtResource( 1 )
+speed = 250.0
+
+[node name="shape" type="CollisionShape2D" parent="enemy3"]
+shape = SubResource( 3 )
+
+[node name="body" type="Polygon2D" parent="enemy3"]
+color = Color( 0.705882, 0.678431, 0.678431, 1 )
+polygon = PoolVector2Array( -6.4624, -14.1747, -2.90251, -15.5986, 5.35645, -15.4563, 8.20436, -14.0323, 8.06197, 13.7349, 4.92926, 15.3012, -3.3297, 15.586, -6.88959, 13.4501 )
+
+[node name="head" type="Polygon2D" parent="enemy3/body"]
+color = Color( 0.101961, 0.0862745, 0.0862745, 1 )
+polygon = PoolVector2Array( -6.14563, -5.92804, -1.19376, -8.33646, 4.64447, -8.19407, 8.06197, -5.91573, 9.48592, -0.362305, 8.34676, 4.76395, 4.07488, 7.32707, -1.47855, 7.18468, -5.94171, 3.45168, -7.16516, -2.0538 )
+
+[node name="sword" type="Polygon2D" parent="enemy3/body"]
+
+[node name="attacked" type="Polygon2D" parent="enemy3/body"]
+visible = false
+rotation = 3.14159
+color = Color( 0.686275, 0.207843, 0.207843, 0.74902 )
+polygon = PoolVector2Array( -5.56226, -10.155, -8.69495, -44.33, 0.418365, -11.579, 15.9395, -43.3332, 6.82617, -10.4398, 41.2859, -31.372, 9.8165, -5.59836, 52.3928, 0.0974731, 12.522, -0.472107, 48.6906, 19.1785, 16.9363, 11.7739, 33.1694, 34.9844, 8.39252, 7.21725, 26.4768, 35.8388, 7.39575, 14.4794, 11.3828, 29.0038, 3.97827, 14.3371, 1.27277, 44.5249, 0.133575, 13.9099, -15.8148, 40.3955, -5.13507, 12.0587, -31.4783, 26.5831, -11.8277, 7.21725, -41.0188, 3.37257, -9.54932, 1.52142, -33.0446, -19.5531, -11.9701, -4.88638, -28.0608, -31.0872, -16.9539, -20.2651, -21.653, -36.783 )
+
+[node name="attack_ray" type="RayCast2D" parent="enemy3/body"]
+enabled = true
+cast_to = Vector2( 40, 0 )
+
+[node name="enemy4" type="KinematicBody2D" parent="."]
+position = Vector2( 600, 200 )
+rotation = -0.785398
+script = ExtResource( 1 )
+speed = 250.0
+
+[node name="shape" type="CollisionShape2D" parent="enemy4"]
+shape = SubResource( 3 )
+
+[node name="body" type="Polygon2D" parent="enemy4"]
+color = Color( 0.705882, 0.678431, 0.678431, 1 )
+polygon = PoolVector2Array( -6.4624, -14.1747, -2.90251, -15.5986, 5.35645, -15.4563, 8.20436, -14.0323, 8.06197, 13.7349, 4.92926, 15.3012, -3.3297, 15.586, -6.88959, 13.4501 )
+
+[node name="head" type="Polygon2D" parent="enemy4/body"]
+color = Color( 0.101961, 0.0862745, 0.0862745, 1 )
+polygon = PoolVector2Array( -6.14563, -5.92804, -1.19376, -8.33646, 4.64447, -8.19407, 8.06197, -5.91573, 9.48592, -0.362305, 8.34676, 4.76395, 4.07488, 7.32707, -1.47855, 7.18468, -5.94171, 3.45168, -7.16516, -2.0538 )
+
+[node name="sword" type="Polygon2D" parent="enemy4/body"]
+
+[node name="attacked" type="Polygon2D" parent="enemy4/body"]
+visible = false
+rotation = 3.14159
+color = Color( 0.686275, 0.207843, 0.207843, 0.74902 )
+polygon = PoolVector2Array( -5.56226, -10.155, -8.69495, -44.33, 0.418365, -11.579, 15.9395, -43.3332, 6.82617, -10.4398, 41.2859, -31.372, 9.8165, -5.59836, 52.3928, 0.0974731, 12.522, -0.472107, 48.6906, 19.1785, 16.9363, 11.7739, 33.1694, 34.9844, 8.39252, 7.21725, 26.4768, 35.8388, 7.39575, 14.4794, 11.3828, 29.0038, 3.97827, 14.3371, 1.27277, 44.5249, 0.133575, 13.9099, -15.8148, 40.3955, -5.13507, 12.0587, -31.4783, 26.5831, -11.8277, 7.21725, -41.0188, 3.37257, -9.54932, 1.52142, -33.0446, -19.5531, -11.9701, -4.88638, -28.0608, -31.0872, -16.9539, -20.2651, -21.653, -36.783 )
+
+[node name="attack_ray" type="RayCast2D" parent="enemy4/body"]
+enabled = true
+cast_to = Vector2( 40, 0 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+margin_right = 113.0
+margin_bottom = 99.0
+text = "A - turn left
+D - turn right
+W - move forward
+S - retreat
+E - attack
+R - block"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -0.950012
+margin_top = -35.8501
+margin_right = -0.950012
+margin_bottom = -5.8501
+rect_min_size = Vector2( 30, 30 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
