@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://main.gd" type="Script" id=2]
@@ -13,6 +13,9 @@ noise = SubResource( 1 )
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 16.0
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 1062.25, 17.9933 )
 
 [node name="main" type="Node2D"]
 script = ExtResource( 2 )
@@ -196,3 +199,9 @@ rect_min_size = Vector2( 30, 30 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="floor" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
+position = Vector2( 589.973, 508.35 )
+shape = SubResource( 4 )

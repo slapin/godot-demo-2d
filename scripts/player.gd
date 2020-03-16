@@ -8,6 +8,7 @@ signal attacked
 
 # Called when the node enters the scene tree for the first time.
 var velocity = Vector2()
+var gravity = -9.8
 export var rot_angle = 5.0
 export var damping = 0.1
 export var min_speed = 5.0
@@ -134,4 +135,5 @@ func _process(delta):
 	if blocking >= 0:
 		blocking -= delta
 func _physics_process(delta):
+	velocity += Vector2(0, gravity) * delta
 	velocity = move_and_slide(velocity)

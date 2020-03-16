@@ -13,6 +13,10 @@ _global_script_class_icons={
 
 }
 
+[application]
+
+run/main_scene="res://main.tscn"
+
 [input]
 
 turn_left={
